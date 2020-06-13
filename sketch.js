@@ -379,5 +379,4 @@ function changeLFODepth(value){
 function runLFO (){
     
   lpFilter.freq(lfo);
-  //  console.log(lfo);
 }
