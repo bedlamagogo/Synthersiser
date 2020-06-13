@@ -1,0 +1,159 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+
+label {
+    /*    padding-right: 10px;
+*/
+}
+
+button {
+
+    height: 2rem;
+    background: white;
+    border: 1px solid white;
+    margin-top: 1rem;
+    margin-right: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+button:focus {
+    background: #444444;
+}
+
+
+h2 {
+    color: white;
+    padding: 0;
+    margin: 0 0 5px 0;
+}
+
+.dialsHolder {
+    position: relative;
+}
+
+.adsrHolder {
+    padding: 10px;
+    margin: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 225px;
+}
+
+#adsr_element {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 425px;
+}
+
+
+#bpm_element{
+
+}
+
+.buttonHolder {
+    padding-top: 1.2rem;
+}
+
+.musicNotePrintOut {
+    margin-top: 1rem;
+    color: white;
+    font-weight: 500;
+    font-size: 2.2rem;
+}
+
+.filterHolder {
+    padding: 10px;
+    margin: 10px;
+    position: absolute;
+    top: 0;
+    left: 425px;
+    height: 225px;
+}
+
+#filter_element2 {
+    width: 425px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.verbHolder {
+    padding: 10px;
+    margin: 10px;
+    position: absolute;
+    top: 0;
+    left: 425px;
+    height: 225px;
+}
+
+#verb_element {
+    width: 425px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.delayHolder {
+    padding: 10px;
+    margin: 10px;
+    height: 225px;
+}
+
+#delay_element {
+    width: 425px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.distHolder {
+    padding: 10px;
+    margin: 10px;
+    height: 225px;
+}
+
+#distort_element {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 425px;
+}
+
+.SequncerHolder {
+
+}
+
+#sequencer {
+
+}
+
+.switch-toggle {
+    float: left;
+    background: #242729;
+    margin-right: 0.25rem;
+    margin-left: 0.25rem;
+}
+
+.switch-toggle input {
+    position: absolute;
+    opacity: 0;
+}
+
+.switch-toggle input + label {
+    padding-right: 0.23rem;
+    float: left;
+    color: #fff;
+    cursor: pointer;
+}
+
+.switch-toggle input:checked + label {
+    background: lime;
+    color: #000;
+}
