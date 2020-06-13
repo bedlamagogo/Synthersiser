@@ -1,0 +1,10 @@
+# Basic Synthersiser Using P5.js Library
+
+Features :
+Single Oscialtor Synth
+16 Step Sequencer
+Random Note and Note Generator (Note based on selectable Musical Scale)
+Oscialtor ADSR Envelope
+Low Pass Filter with Resonance and LFO
+Delay / Reverb / Distort FX Chain
+Octave and BPM Select
