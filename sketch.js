@@ -36,7 +36,7 @@ let selectedNotes = [];
 let notePad;
 let notePrintOut = [];
 
-let octValue =1;
+let octValue = 1;
 
 let lfo;
 let lfoRate;
@@ -53,14 +53,16 @@ function windowResized() {
 }
 
 
+
 function setup() {
 
+    //    seqCanvas = new p5.Element('sequencer');
+    //    seqCanvas = createCanvas(windowWidth, windowHeight/10);
+    //   seqCanvas.mousePressed(canvasPressed);
+    //    seqCanvas.style('padding-left', "25px");
+    //    seqCanvas.style('margin-top', "2rem");
+    //    seqCanvas.style('border', "10px solid blue;");
 
-    seqCanvas = new p5.Element('sequencer');
-    seqCanvas = createCanvas(windowWidth / 1.5, 600);
-    seqCanvas.mousePressed(canvasPressed);
-    seqCanvas.style('padding-left', "25px");
-    seqCanvas.style('margin-top', "2rem");
 
 
     cellWidth = width / beatLength;
@@ -73,7 +75,7 @@ function setup() {
 
     synthNoise = new p5.Oscillator('triangle');
     synthNoise.start();
-    
+
     lfo = new p5.Oscillator('sine');
     lfo.freq(1);
     lfo.amp(0);
@@ -94,7 +96,6 @@ function setup() {
 
     //  Chain can be used to create FXs Chains
     lpFilter.chain(del, verb, dist);
-    //  lpFilter.chain(verb);
 
     del.drywet(0);
     dist.drywet(0);
@@ -107,42 +108,10 @@ function setup() {
 
     callbasicScale();
     createPhrase();
-    drawMatrix();
     lpFilter.freq(lfo);
 
 }
 
-function drawMatrix() {
-
-    seqCanvas = createCanvas(windowWidth / 1.5, 600);
-
-    stroke('grey');
-    strokeWeight(2);
-    fill('white');
-
-
-    // Vertical Lines
-    for (let i = 0; i < beatLength + 1; i++) {
-        line(i * cellWidth, 500, i * cellWidth, 550);
-    }
-
-    //Horizontal
-    //  for (let i = 0; i < 2; i++) {
-    //    line(0, i * height / 3, width, i * height / 3);
-    //  }
-    line(0, 500, width, 500);
-    line(0, 550, width, 550);
-
-    noStroke();
-
-    for (let i = 0; i < beatLength; i++) {
-
-        if (syPat[i] === 1) {
-            ellipse(i * cellWidth + 0.5 * cellWidth, 525, 10);
-        }
-    }
-
-}
 
 function createPhrase() {
     drums = new p5.Part();
@@ -167,48 +136,77 @@ function createPhrase() {
 function changeNoteseq(beatIndex) {
 
     if (syPat[beatIndex - 1] == 1) {
-        let thisNote = selectedNotes[beatIndex - 1]*octValue;
+        let thisNote = selectedNotes[beatIndex - 1] * octValue;
         synthNoise.freq(thisNote, 0);
-    //    synthNoise.freq(selectedNotes[beatIndex - 1], 0);
+        //    synthNoise.freq(selectedNotes[beatIndex - 1], 0);
     }
 }
 
 function sequence(time, beatIndex) {
 
     setTimeout(() => {
-        drawMatrix();
-        stroke('red');
-        fill(255, 0, 0, 30);
-        rect((beatIndex - 1) * cellWidth, 500, cellWidth, 50);
-        changeNoteseq(beatIndex);
-        timeVal = time;
-//        runLFO ();
+
+        let toChange = "stepLight" + beatIndex;
+        let toClear = "";
+
+        if (beatIndex == 1) {
+            toClear = "stepLight16";
+        } else {
+            toClear = "stepLight" + (beatIndex - 1);
+        }
+
+
+        document.getElementById(toChange).setAttribute("class", "stepLightOn");
+
+        document.getElementById(toClear).setAttribute("class", "stepLight");
 
     }, time * 1000);
 
 
 }
 
-function canvasPressed() {
-    let rowClicked = floor(mouseY / height);
-    let indexClicked = floor(beatLength * mouseX / width);
-    if (mouseY >= 500 && mouseY <= 550) {
 
-        if (syPat[indexClicked] === 0) {
-            syPat[indexClicked] = 1;
-        } else {
+function setStep(val) {
+
+    let idToChange = "stepButton" + val;
+
+    console.log(idToChange);
+
+
+    let indexClicked = val - 1;
+
+    if (syPat[indexClicked] === 0) {
+        syPat[indexClicked] = 1;
+        document.getElementById(idToChange).setAttribute("class", "stepButtonpressed");
+
+    } else {
+        if (val == 1 || val == 5 || val == 9 || val == 12) {
             syPat[indexClicked] = 0;
+            document.getElementById(idToChange).setAttribute("class", "stepButtonBeat");
+        } else {
+
+            syPat[indexClicked] = 0;
+            document.getElementById(idToChange).setAttribute("class", "stepButton");
         }
     }
-    drawMatrix();
+
 }
+
+
+
 
 function startStop() {
     if (!drums.isPlaying) {
+
         document.getElementById('startStopBut').style.background = 'lime';
         drums.metro.metroTicks = 0;
         drums.loop();
     } else {
+        for (let i = 0; i < syPat; i++) {
+            let idToChange = "stepLight" + i + 1;
+            document.getElementById(idToChange).setAttribute("class", "stepButton");
+
+        }
         drums.stop();
         document.getElementById('startStopBut').style.background = 'white';
     }
@@ -270,9 +268,9 @@ function changeValues(name, value) {
     } else if (name === 'BPM') {
         bpmCTR = value;
         drums.setBPM(bpmCTR);
-    }else if (name === "Lfo HZ") {
+    } else if (name === "Lfo HZ") {
         changeLFOFreq(value);
-    }else if (name === "LFO Depth") {
+    } else if (name === "LFO Depth") {
         changeLFODepth(value);
     }
 }
@@ -283,6 +281,25 @@ function loadRandom() {
         syPat[i] = Math.round(Math.random());
     }
     document.getElementById('Random').style.background = 'white';
+
+    console.log("Pre For Loop");
+    
+    for (let i = 0; i < syPat.length; i++) {
+        let idToChange = "stepButton" + (i + 1);
+        
+        console.log(idToChange);
+
+        if (syPat[i] === 0) {
+
+            if ((i + 1) == 1 || (i + 1) == 5 || (i + 1) == 9 || (i + 1) == 12) {
+                document.getElementById(idToChange).setAttribute("class", "stepButtonBeat");
+            } else {
+                document.getElementById(idToChange).setAttribute("class", "stepButton");
+            }
+        } else {
+            document.getElementById(idToChange).setAttribute("class", "stepButtonpressed");
+        }
+    }
 }
 
 function changeNote() {
@@ -364,19 +381,23 @@ function callbasicScale() {
 
 }
 
-function changeOct(chg){ 
+function changeOct(chg) {
     octValue = chg;
 }
 
-function changeLFOFreq(value){
+function changeLFOFreq(value) {
     lfo.freq(value);
 }
 
-function changeLFODepth(value){
-    lfo.amp(value*8);
+function changeLFODepth(value) {
+    if (value == "0") {
+        //       synthNoise.amp(0.5);
+    }
+
+    lfo.amp(value * 8);
 }
 
-function runLFO (){
-    
-  lpFilter.freq(lfo);
+function runLFO() {
+
+    lpFilter.freq(lfo);
 }

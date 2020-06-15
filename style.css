@@ -2,27 +2,13 @@ html,
 body {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 
 label {
     /*    padding-right: 10px;
 */
-}
-
-button {
-
-    height: 2rem;
-    background: white;
-    border: 1px solid white;
-    margin-top: 1rem;
-    margin-right: 1rem;
-    align-items: center;
-    justify-content: center;
-}
-
-button:focus {
-    background: #444444;
 }
 
 
@@ -34,80 +20,66 @@ h2 {
 
 .dialsHolder {
     position: relative;
+    display: flex;
+
 }
 
+.leftsidedials {
+    width: 65vw;
+    border: 1px solid green;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+
+
+
 .adsrHolder {
-    padding: 10px;
-    margin: 10px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 225px;
+    padding: 1rem;
+    border: 1px solid red;
+
 }
 
 #adsr_element {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 425px;
-}
-
-
-#bpm_element{
-
-}
-
-.buttonHolder {
-    padding-top: 1.2rem;
-}
-
-.musicNotePrintOut {
-    margin-top: 1rem;
-    color: white;
-    font-weight: 500;
-    font-size: 2.2rem;
+    align-items: baseline;
 }
 
 .filterHolder {
-    padding: 10px;
-    margin: 10px;
-    position: absolute;
-    top: 0;
-    left: 425px;
-    height: 225px;
+    padding: 1rem;
+    border: 1px blue solid;
 }
 
-#filter_element2 {
-    width: 425px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+#filter_element2 {}
+
+.bpmHolder {}
+
+#bpm_element {}
+
+.rightsideHolder {
+    width: 35vw;
 }
+
 
 .verbHolder {
     padding: 10px;
     margin: 10px;
-    position: absolute;
-    top: 0;
-    left: 425px;
-    height: 225px;
+
+    /*    left: 425px;*/
+
 }
 
 #verb_element {
-    width: 425px;
     display: flex;
-    align-items: center;
-    justify-content: space-around;
 }
 
 .delayHolder {
     padding: 10px;
     margin: 10px;
-    height: 225px;
 }
 
 #delay_element {
-    width: 425px;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -116,22 +88,169 @@ h2 {
 .distHolder {
     padding: 10px;
     margin: 10px;
-    height: 225px;
+
+
+
 }
+
 
 #distort_element {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    width: 425px;
+    /*    width: 425px;*/
 }
+
+
+
+
+
+.musicNotePrintOut {
+    margin-left: 1.2rem;
+    color: white;
+    font-weight: 500;
+    font-size: 2.2rem;
+}
+
+.buttonHolder {
+    padding-top: 1.2rem;
+    display: flex;
+    align-content: space-between;
+}
+
+button {
+
+    height: 2rem;
+    background: white;
+    border: 1px solid white;
+    margin-top: 1rem;
+    margin-right: 1rem;
+    align-items: center;
+    justify-content: center;
+    /*    padding: 1rem;*/
+}
+
+
+
+button:focus {
+    background: #444444;
+}
+
+
 
 .SequncerHolder {
 
+    /*  margin: 2rem; */
+    border: 1px solid yellow;
+
+
+
+
+
 }
 
-#sequencer {
+.stepLayer {
 
+
+}
+
+.stepLight {
+    display: flex;
+    justify-content: center;
+    height: 3px;
+    width: 50%;
+    border: solid black 1px;
+    background-color: black;
+    margin-left: 15%;
+    margin-top: 10%;
+}
+
+.stepLightOn{
+    display: flex;
+    justify-content: center;
+    height: 3px;
+    width: 50%;
+    border: solid white 1px;
+    background-color: white;
+    margin-left: 15%;
+    margin-top: 10%;
+    
+}
+
+.stepButtons {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+
+}
+
+.stepButton {
+    position: relative;
+    width: 4.5rem;
+    height: 4.5rem;
+    background: grey;
+    font-size: 2rem;
+    text-decoration: underline;
+    color: rgba(255, 255, 255, 0.3);
+    z-index: 0;
+}
+
+.stepButtonBeat {
+    position: relative;
+    width: 4.5rem;
+    height: 4.5rem;
+    background: grey;
+    font-size: 2rem;
+    text-decoration: underline;
+    color: rgba(255, 255, 255, 0.3);
+    z-index: 0;
+}
+
+.stepButtonBeat::after,
+.stepButtonBeat::before {
+    content: '';
+    position: absolute;
+
+}
+
+.stepButtonBeat::before {
+    border: 2px solid white;
+    top: 0.1em;
+    bottom: 0.1em;
+    right: 0.1em;
+    left: 0.1em;
+}
+
+.stepButton:hover {
+    color: rgba(255, 255, 0, 1);
+}
+
+.stepButtonpressed {
+    color: rgba(0, 255, 0, 0.6);
+    position: relative;
+    width: 4.5rem;
+    height: 4.5rem;
+    background: grey;
+    font-size: 2rem;
+    text-decoration: underline;
+    z-index: 0;
+}
+
+.stepButtonpressed::after,
+.stepButtonpressed::before {
+    content: '';
+    position: absolute;
+
+}
+
+.stepButtonpressed::before {
+    border: 2px solid rgba(0, 255, 0, 0.6);
+    top: 0.1em;
+    bottom: 0.1em;
+    right: 0.1em;
+    left: 0.1em;
 }
 
 .switch-toggle {
@@ -139,11 +258,13 @@ h2 {
     background: #242729;
     margin-right: 0.25rem;
     margin-left: 0.25rem;
+
 }
 
 .switch-toggle input {
     position: absolute;
     opacity: 0;
+
 }
 
 .switch-toggle input + label {
@@ -151,6 +272,8 @@ h2 {
     float: left;
     color: #fff;
     cursor: pointer;
+    padding: 1rem;
+    border: 2px solid grey;
 }
 
 .switch-toggle input:checked + label {
