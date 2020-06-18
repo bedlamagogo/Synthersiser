@@ -1,16 +1,11 @@
 html,
 body {
+    width: 100vw;
+    height: 100vh;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
-
-label {
-    /*    padding-right: 10px;
-*/
-}
-
 
 h2 {
     color: white;
@@ -26,19 +21,13 @@ h2 {
 
 .leftsidedials {
     width: 65vw;
-    border: 1px solid green;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
 }
-
-
 
 
 .adsrHolder {
     padding: 1rem;
-    border: 1px solid red;
-
 }
 
 #adsr_element {
@@ -48,12 +37,20 @@ h2 {
 
 .filterHolder {
     padding: 1rem;
-    border: 1px blue solid;
+
 }
 
-#filter_element2 {}
+#filter_element2 {
+        padding-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-around
+}
 
-.bpmHolder {}
+.bpmHolder {
+    padding: 1rem;
+}
 
 #bpm_element {}
 
@@ -65,18 +62,18 @@ h2 {
 .verbHolder {
     padding: 10px;
     margin: 10px;
-
-    /*    left: 425px;*/
-
 }
 
 #verb_element {
     display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .delayHolder {
     padding: 10px;
     margin: 10px;
+
 }
 
 #delay_element {
@@ -98,24 +95,23 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    /*    width: 425px;*/
 }
 
 
-
-
-
-.musicNotePrintOut {
-    margin-left: 1.2rem;
+.note {
+    margin-right: 1rem;
+    height: 2.2rem;
     color: white;
     font-weight: 500;
     font-size: 2.2rem;
+    text-align: center;
 }
 
 .buttonHolder {
     padding-top: 1.2rem;
+    padding-bottom: 1.2rem;
     display: flex;
-    align-content: space-between;
+    justify-content: space-around;
 }
 
 button {
@@ -127,7 +123,7 @@ button {
     margin-right: 1rem;
     align-items: center;
     justify-content: center;
-    /*    padding: 1rem;*/
+
 }
 
 
@@ -138,21 +134,11 @@ button:focus {
 
 
 
-.SequncerHolder {
-
-    /*  margin: 2rem; */
-    border: 1px solid yellow;
-
-
-
-
-
+.stepTitle {
+    padding: 1.2rem;
 }
 
-.stepLayer {
-
-
-}
+.stepLayer {}
 
 .stepLight {
     display: flex;
@@ -165,7 +151,7 @@ button:focus {
     margin-top: 10%;
 }
 
-.stepLightOn{
+.stepLightOn {
     display: flex;
     justify-content: center;
     height: 3px;
@@ -174,7 +160,7 @@ button:focus {
     background-color: white;
     margin-left: 15%;
     margin-top: 10%;
-    
+
 }
 
 .stepButtons {
@@ -279,4 +265,35 @@ button:focus {
 .switch-toggle input:checked + label {
     background: lime;
     color: #000;
+}
+
+
+
+@media screen and (max-width: 1170px) {
+    .dialsHolder {
+        flex-wrap: wrap;
+        justify-content: space-around;
+
+    }
+
+    .leftsidedials {
+        width: 100vw;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .rightsideHolder {
+        width: 80vw;
+        margin: 0 auto;
+    }
+
+    .buttonHolder {
+        margin: 0 auto;
+        padding-left: 5%;
+        padding-right: 5%;
+        width: 100vw;
+
+        border: 1px solid green;
+    }
 }

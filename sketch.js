@@ -38,6 +38,8 @@ let notePrintOut = [];
 
 let octValue = 1;
 
+let firstClick = 0;
+
 let lfo;
 let lfoRate;
 let lfoDepth;
@@ -55,15 +57,6 @@ function windowResized() {
 
 
 function setup() {
-
-    //    seqCanvas = new p5.Element('sequencer');
-    //    seqCanvas = createCanvas(windowWidth, windowHeight/10);
-    //   seqCanvas.mousePressed(canvasPressed);
-    //    seqCanvas.style('padding-left', "25px");
-    //    seqCanvas.style('margin-top', "2rem");
-    //    seqCanvas.style('border', "10px solid blue;");
-
-
 
     cellWidth = width / beatLength;
 
@@ -121,12 +114,8 @@ function createPhrase() {
         env.play(synthNoise, time, 0)
     }, syPat);
 
-    //    notePart = new p5.Phrase('Note', (time) => {
-    //        changeNote(noteValue)
-    //    }, selectedNotes);
 
     drums.addPhrase(syPart);
-    //    drums.addPhrase(notePart);
     drums.addPhrase('sec', sequence, sPat);
 
 
@@ -138,13 +127,14 @@ function changeNoteseq(beatIndex) {
     if (syPat[beatIndex - 1] == 1) {
         let thisNote = selectedNotes[beatIndex - 1] * octValue;
         synthNoise.freq(thisNote, 0);
-        //    synthNoise.freq(selectedNotes[beatIndex - 1], 0);
     }
 }
 
 function sequence(time, beatIndex) {
 
     setTimeout(() => {
+
+        changeNoteseq(beatIndex);
 
         let toChange = "stepLight" + beatIndex;
         let toClear = "";
@@ -170,9 +160,6 @@ function setStep(val) {
 
     let idToChange = "stepButton" + val;
 
-    console.log(idToChange);
-
-
     let indexClicked = val - 1;
 
     if (syPat[indexClicked] === 0) {
@@ -196,11 +183,18 @@ function setStep(val) {
 
 
 function startStop() {
+
+    if (firstClick == 0) {
+        userStartAudio();
+        firstClick = 1;
+    }
+
     if (!drums.isPlaying) {
 
         document.getElementById('startStopBut').style.background = 'lime';
-        drums.metro.metroTicks = 0;
+        //       drums.metro.metroTicks = 0;
         drums.loop();
+
     } else {
         for (let i = 0; i < syPat; i++) {
             let idToChange = "stepLight" + i + 1;
@@ -217,7 +211,7 @@ function changeValues(name, value) {
     if (name === "Frequency") {
         lpFilter.freq(value);
     } else if (name === "Res") {
-        lpFilter.res(value, 250);
+        lpFilter.res(value);
     } else if (name === "Gain") {
 
     } else if (name === "Attack") {
@@ -282,12 +276,8 @@ function loadRandom() {
     }
     document.getElementById('Random').style.background = 'white';
 
-    console.log("Pre For Loop");
-    
     for (let i = 0; i < syPat.length; i++) {
         let idToChange = "stepButton" + (i + 1);
-        
-        console.log(idToChange);
 
         if (syPat[i] === 0) {
 
@@ -347,17 +337,18 @@ function changeNote() {
             selectedNotes[i] = noteFreq[selectedNotes[i]];
         }
     }
-    document.getElementById("musicNotePrintOut").innerHTML = "";
-    var node = document.createElement("DIV");
-    for (let i = 0; i < notePrintOut.length; i++) {
-        if (i == notePrintOut.length - 1) {
-            node.innerHTML += " " + notePrintOut[i];
-        } else {
-            node.innerHTML += " " + notePrintOut[i] + " - ";
-        }
+
+    for (i = 0; i < 16; i++) {
+
+        let id = "noteStep" + (i + 1);
+        var node = document.createElement("DIV");
+
+        document.getElementById(id).innerHTML = "";
+
+        node.innerHTML = notePrintOut[i];
+        document.getElementById(id).appendChild(node);
     }
 
-    document.getElementById("musicNotePrintOut").appendChild(node);
 
 }
 
@@ -377,8 +368,10 @@ function callbasicScale() {
     for (let i = 0; i < 16; i++) {
         selectedNotes[i] = note;
     }
-    document.getElementById('musicNotePrintOut').innerHTML = "";
-
+    for (i = 0; i < 16; i++) {
+        let id = "noteStep" + (i + 1);
+        document.getElementById(id).innerHTML = "";
+    }
 }
 
 function changeOct(chg) {
