@@ -33,6 +33,7 @@ h2 {
 #adsr_element {
     display: flex;
     align-items: baseline;
+    justify-content: space-around;
 }
 
 .filterHolder {
@@ -41,7 +42,7 @@ h2 {
 }
 
 #filter_element2 {
-        padding-top: 2rem;
+    padding-top: 2rem;
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
